@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: departmentService
+              uri: lb://DEPARTMENT-SERVICE
+              predicates:
+                - Path=/department/**
+            - id: uiService
+              uri: lb://UI-SERVICE
+              predicates:
+                - Path=/ui/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8083/eureka

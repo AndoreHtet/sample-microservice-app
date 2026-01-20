@@ -1,8 +1,9 @@
-package com.example.departmentservice.ds;
+package com.example.webui.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
@@ -10,15 +11,17 @@ import java.util.stream.StreamSupport;
 
 @Data
 @AllArgsConstructor
-public class DepartmentDTO {
+public class DepartmentList {
+    private int id;
+    private String code;
+    private String name;
+    private String country;
+    private List<DepartmentRecord> departments;
 
-    private List<Department> departments;
-
-    public DepartmentDTO(){
+    public DepartmentList(){
 
     }
-
-    public DepartmentDTO(Spliterator<Department> spliterator){
+    public DepartmentList(Spliterator<DepartmentRecord> spliterator){
         departments = StreamSupport.stream(spliterator, false)
                 .collect(Collectors.toList());
     }
